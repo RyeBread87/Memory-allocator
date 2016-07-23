@@ -1,0 +1,35 @@
+Partner Submission: Ryan Smith & Suzanna Kisa (Kelley)
+CS537-3
+Program 3
+
+Note: We spoke with Tyler and during office hours today and he said that it was OK to hand this in a little late.
+
+In this program, we implemented our own malloc and free. In order to implement this, we also created a few helper methods.
+
+Methods included in mem.c:
+
+int roundPages(int sizeOfRegion);
+    Called by: create_space
+    This method serves to round the memory to the nearest page size.
+
+int create_space(int sizeOfRegion);
+    Called by: Mem_Init
+    This method serves to create the space for Mem_init. This method calls out to mmap.
+
+    void *Mem_Init(int sizeOfRegion);
+    Called by: application
+    This method initializes the memory that can then be allocated.
+    In this method, we set up our block headers to contain all of the necessary information to be used later in  Mem_Alloc.
+
+    void *Mem_Alloc(int size);
+    Called by: application
+    This method is what actually allocates the memory.
+    This method contains a main while loop in which we loop through all of the existing blocks of memory, both used and unused and find the block of memory that we can allocate. Once we find a block to allocate, we need to set the appropriate block header information and make sure that we have a pointer to the next address.
+
+    int Mem_Free(void *ptr);
+    Called by: application
+    This method is called to free the block of allocated memory. The memory is freed and then added to the beginning of the free list.
+
+    void Mem_Dump();
+    Called by: <used to troubleshoot>
+    This method was created to help troubleshoot the implementation of this code. This prints out information to help with the debugging and identifying where the issues are.
